@@ -1,1 +1,5 @@
-print("Version 0.1 actualizada el 16/03/24")
+def main():
+    print("Version 0.2 actualizado el 16/03/24 c:")
+
+if __name__ == "__main__":
+    main()
