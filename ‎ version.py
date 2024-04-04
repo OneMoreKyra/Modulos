@@ -1,5 +1,5 @@
 def main(usuario_id):
-    print("Version 0.6 actualizado el 18/03/24 c:")
+    print("Version 0.7 actualizado el 03/04/24 c:")
 
 if __name__ == "__main__":
     main()
