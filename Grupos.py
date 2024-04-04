@@ -1,6 +1,10 @@
 import requests
 import json
 import os
+from colorama import Fore, init
+
+# Inicializar colorama
+init()
 
 def obtener_grupos(usuario_id):
     url = f"https://groups.roblox.com/v1/users/{usuario_id}/groups/roles"
@@ -32,12 +36,25 @@ def comparar_grupos(usuario_id, grupos_actuales):
         grupos_anteriores = []
     grupos_nuevos = [grupo for grupo in grupos_actuales if grupo not in grupos_anteriores]
     grupos_antiguos = [grupo for grupo in grupos_anteriores if grupo not in grupos_actuales]
+    grupos_que_ya_estaban = [grupo for grupo in grupos_actuales if grupo not in grupos_nuevos]
     if grupos_nuevos:
-        print(f"Grupos nuevos:\n{'\n'.join(grupos_nuevos)}")
+        print(Fore.GREEN + "Grupos nuevos:")
+        for grupo in grupos_nuevos:
+            print(Fore.GREEN + f"{grupo}")
+    if grupos_que_ya_estaban:
+        print(Fore.YELLOW + "Grupos que ya estaban:")
+        for grupo in grupos_que_ya_estaban:
+            print(Fore.YELLOW + f"{grupo}")
     if grupos_antiguos:
-        print(f"Grupos que ya no están:\n{'\n'.join(grupos_antiguos)}")
+        print(Fore.RED + "Grupos que ya no están:")
+        for grupo in grupos_antiguos:
+            print(Fore.RED + f"{grupo}")
+    grupos_a_guardar = grupos_que_ya_estaban + grupos_nuevos
+    guardar_grupos(usuario_id, grupos_a_guardar)
 
 def main(usuario_id):
     grupos_actuales = obtener_grupos(usuario_id)
     comparar_grupos(usuario_id, grupos_actuales)
-    guardar_grupos(usuario_id, grupos_actuales)
+
+# Restablecer colorama
+print(Fore.RESET)
