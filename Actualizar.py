@@ -2,7 +2,7 @@ import requests
 import os
 from colorama import Fore, init
 
-def main():
+def main(usuario_id):
     init()  # Inicializa colorama
     url_exe = 'https://github.com/OneMoreKyra/iniciador/raw/main/Sniper.exe'
     r = requests.get(url_exe)
