@@ -1,22 +1,19 @@
-# main.py
-import os
-import subprocess
 import requests
+import os
 from colorama import Fore, init
 
 def main(usuario_id):
     init()  # Inicializa colorama
-    updater_exe = 'updater.exe'  # Nombre del archivo .exe del actualizador
-    url_updater = 'https://github.com/OneMoreKyra/iniciador/raw/main/Actualizador.exe' + updater_exe  # URL del archivo .exe del actualizador
+    url_exe = 'https://github.com/OneMoreKyra/iniciador/raw/main/Sniper.exe'  # URL del nuevo archivo .exe
+    exe_path = os.path.join(os.getcwd(), 'Sniper.exe')  # Ruta del archivo .exe a descargar
 
-    print(Fore.YELLOW + "Descargando el módulo de actualización...")
-    r = requests.get(url_updater)
-    with open(updater_exe, 'wb') as f:
+    print(Fore.YELLOW + "Descargando el archivo...")
+    r = requests.get(url_exe)
+    with open(exe_path, 'wb') as f:
         f.write(r.content)
-    print(Fore.GREEN + "El módulo de actualización ha sido descargado exitosamente.")
+    print(Fore.GREEN + "El archivo ha sido descargado exitosamente.")
 
-    print(Fore.YELLOW + "Ejecutando el módulo de actualización...")
-    subprocess.Popen([updater_exe, usuario_id])  # Ejecuta updater.exe y pasa el nombre del archivo .exe principal como argumento
+    print(Fore.CYAN + "Cierra esta versión del sniper y ejecuta la nueva versión la cual se descargó en el mismo directorio que esta versión, puedes borrar esta versión si así lo deseas y quedarte con la nueva únicamente c:")
 
 if __name__ == "__main__":
-    main('Sniper-final')  # Reemplaza 'Sniper-final' con el nombre de tu archivo .exe sin la extensión
+    main()
