@@ -34,9 +34,14 @@ def comparar_grupos(usuario_id, grupos_actuales):
             grupos_anteriores = f.read().splitlines()
     except FileNotFoundError:
         grupos_anteriores = []
-    grupos_nuevos = [grupo for grupo in grupos_actuales if grupo not in grupos_anteriores]
-    grupos_antiguos = [grupo for grupo in grupos_anteriores if grupo not in grupos_actuales]
-    grupos_que_ya_estaban = [grupo for grupo in grupos_actuales if grupo not in grupos_nuevos]
+
+    ids_grupos_actuales = {grupo.split('[ID: ')[-1].rstrip(']') for grupo in grupos_actuales}
+    ids_grupos_anteriores = {grupo.split('[ID: ')[-1].rstrip(']') for grupo in grupos_anteriores}
+
+    grupos_nuevos = [grupo for grupo in grupos_actuales if grupo.split('[ID: ')[-1].rstrip(']') not in ids_grupos_anteriores]
+    grupos_antiguos = [grupo for grupo in grupos_anteriores if grupo.split('[ID: ')[-1].rstrip(']') not in ids_grupos_actuales]
+    grupos_que_ya_estaban = [grupo for grupo in grupos_actuales if grupo.split('[ID: ')[-1].rstrip(']') in ids_grupos_anteriores]
+
     if grupos_nuevos:
         print(Fore.GREEN + "Grupos nuevos:")
         for grupo in grupos_nuevos:
@@ -49,6 +54,7 @@ def comparar_grupos(usuario_id, grupos_actuales):
         print(Fore.RED + "Grupos que ya no están:")
         for grupo in grupos_antiguos:
             print(Fore.RED + f"{grupo}")
+
     grupos_a_guardar = grupos_que_ya_estaban + grupos_nuevos
     guardar_grupos(usuario_id, grupos_a_guardar)
 
@@ -58,3 +64,6 @@ def main(usuario_id):
 
 # Restablecer colorama
 print(Fore.RESET)
+
+# Ejemplo de ejecución del script
+# main('ID_DEL_USUARIO_AQUI')
