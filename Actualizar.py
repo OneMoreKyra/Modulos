@@ -4,7 +4,7 @@ import sys
 import shutil
 from colorama import Fore, init
 
-def main():
+def main(usuario_id):
     init()  # Inicializa colorama
     url_exe = 'https://github.com/OneMoreKyra/iniciador/raw/main/Sniper.exe'  # URL del nuevo archivo .exe
     exe_path = os.path.join(os.getcwd(), 'Sniper.exe')  # Ruta del archivo .exe a descargar
