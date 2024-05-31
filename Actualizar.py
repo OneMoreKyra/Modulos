@@ -15,16 +15,16 @@ def main(*args):  # Acepta argumentos aunque no los use
     new_exe = os.path.join(os.getcwd(), 'Sniper_0.11.exe')  # Nueva ruta del archivo descargado
     current_exe = sys.argv[0]  # Ruta del archivo .exe actual en ejecución
 
+    # Verifica si el nuevo archivo ya existe antes de descargar
+    if os.path.exists(new_exe):
+        print(Fore.RED + "Ya tienes la última versión instalada. No es necesario actualizar.")
+        return
+
     print(Fore.YELLOW + "Descargando el archivo...")
     r = requests.get(url_exe)
     with open(exe_path, 'wb') as f:
         f.write(r.content)
     print(Fore.GREEN + "El archivo ha sido descargado exitosamente.")
-
-    # Verifica si el nuevo archivo ya existe
-    if os.path.exists(new_exe):
-        print(Fore.RED + "Ya tienes la última versión instalada. No es necesario actualizar.")
-        return
 
     os.rename(exe_path, new_exe)
 
