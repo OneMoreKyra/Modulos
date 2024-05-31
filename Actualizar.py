@@ -12,7 +12,7 @@ def main(*args):  # Acepta argumentos aunque no los use
     init()  # Inicializa colorama
     url_exe = 'https://github.com/OneMoreKyra/iniciador/raw/main/Sniper.exe'  # URL del nuevo archivo .exe
     exe_path = os.path.join(os.getcwd(), 'Sniper.exe')  # Ruta del archivo .exe a descargar
-    new_exe = os.path.join(os.getcwd(), 'Sniper_new.exe')  # Nueva ruta del archivo descargado
+    new_exe = os.path.join(os.getcwd(), 'Sniper_0.11.exe')  # Nueva ruta del archivo descargado
     current_exe = sys.argv[0]  # Ruta del archivo .exe actual en ejecución
 
     print(Fore.YELLOW + "Descargando el archivo...")
