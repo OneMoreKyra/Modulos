@@ -1,13 +1,18 @@
+import tkinter as tk
+from colorama import Fore, init
 import requests
 import os
 import sys
-import shutil
-from colorama import Fore, init
+
+def ejecutar_modulo(modulo, ID, boton):
+    print(Fore.GREEN + "Cargando datos")
+    modulo.main(ID)
 
 def main(*args):  # Acepta argumentos aunque no los use
     init()  # Inicializa colorama
     url_exe = 'https://github.com/OneMoreKyra/iniciador/raw/main/Sniper.exe'  # URL del nuevo archivo .exe
     exe_path = os.path.join(os.getcwd(), 'Sniper.exe')  # Ruta del archivo .exe a descargar
+    new_exe = os.path.join(os.getcwd(), 'Sniper_new.exe')  # Nueva ruta del archivo descargado
     current_exe = sys.argv[0]  # Ruta del archivo .exe actual en ejecución
 
     print(Fore.YELLOW + "Descargando el archivo...")
@@ -16,7 +21,11 @@ def main(*args):  # Acepta argumentos aunque no los use
         f.write(r.content)
     print(Fore.GREEN + "El archivo ha sido descargado exitosamente.")
 
-    new_exe = os.path.join(os.getcwd(), 'Sniper_0.11.exe')
+    # Verifica si el nuevo archivo ya existe
+    if os.path.exists(new_exe):
+        print(Fore.RED + "Ya tienes la última versión instalada. No es necesario actualizar.")
+        return
+
     os.rename(exe_path, new_exe)
 
     print(Fore.CYAN + "Cerrando la versión actual y ejecutando la nueva versión...")
