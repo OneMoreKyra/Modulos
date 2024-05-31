@@ -16,7 +16,7 @@ def main(*args):  # Acepta argumentos aunque no los use
         f.write(r.content)
     print(Fore.GREEN + "El archivo ha sido descargado exitosamente.")
 
-    new_exe = os.path.join(os.getcwd(), 'Sniper_new.exe')
+    new_exe = os.path.join(os.getcwd(), 'Sniper_0.11.exe')
     os.rename(exe_path, new_exe)
 
     print(Fore.CYAN + "Cerrando la versión actual y ejecutando la nueva versión...")
